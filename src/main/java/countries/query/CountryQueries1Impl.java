@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.StringJoiner;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
 
 public class CountryQueries1Impl extends Repository<Country>
         implements CountryQueries1 {
@@ -131,6 +133,20 @@ public class CountryQueries1Impl extends Repository<Country>
     @Override
     public Optional<Country> getFirstCountryByStartingLetter(char letter) {
         return Optional.empty();
+    }
+
+    @Override
+    public String getCommaSeparatedOrderedCountryNames() {
+        return getAll()
+                .stream()
+                .map(Country::getName)
+                .sorted()
+                .collect(Collector.of(
+                        () -> new StringJoiner(","),
+                        StringJoiner::add,
+                        StringJoiner::merge,
+                        StringJoiner::toString
+                ));
     }
 
     public static void main(String[] args) throws IOException {

@@ -4,10 +4,7 @@ import countries.model.Country;
 import countries.model.Region;
 
 import java.time.ZoneId;
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Defines query methods for Country objects.
@@ -95,7 +92,7 @@ public interface CountryQueries5 {
      *
      * @return the result
      */
-    Optional<Double> getAverageLengthOfCountryNames();
+    OptionalDouble getAverageLengthOfCountryNames();
 
     /**
      * Returns all distinct regions of the countries with null area.
